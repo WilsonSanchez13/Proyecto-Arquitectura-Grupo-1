@@ -1,0 +1,40 @@
+:root {
+  --azul: #112a42; --verde: #0b4a2f; --fondo: #ecf1ec; --borde: #dde5de; --suave: #5b6d63;
+  --ok-f: #d5efe2; --ok-t: #17704c; --pen-f: #fdecc1; --pen-t: #86560a; --err-f: #fbdcdc; --err-t: #a82a2a;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.45 "Segoe UI", Arial, sans-serif; color: #12281f; background: var(--fondo); }
+h1, h2, p, dl, dd, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+.cabecera { background: var(--azul); color: #fff; }
+.cabecera__interior { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; }
+.cabecera p { color: #b6c6d4; }
+.enlaces { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.enlaces a { color: #fff; }
+
+.contenido { display: grid; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+h2 { font-size: 1.1rem; margin-bottom: .6rem; }
+.cuenta { display: inline-block; margin-left: .4rem; padding: .05rem .55rem; border-radius: 999px; background: var(--azul); color: #fff; font-size: .75rem; }
+
+.prueba { padding: 1rem 1.25rem; background: var(--ok-f); border-radius: 10px; }
+.prueba dl { display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+.prueba dt { font-size: .75rem; color: var(--ok-t); }
+.prueba dd { font: 600 1rem Consolas, monospace; }
+
+.tabla-contenedor { overflow-x: auto; background: #fff; border: 1px solid var(--borde); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+th, td { padding: .6rem .9rem; text-align: left; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+tbody tr:last-child > * { border-bottom: 0; }
+thead th { font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--suave); }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.vacio { text-align: center; color: var(--suave); white-space: normal; }
+
+.estado { display: inline-block; padding: .1rem .6rem; border-radius: 999px; font-size: .75rem; font-weight: 600; background: #e9efe9; color: var(--suave); }
+.estado--Pagada, .estado--Aprobado { background: var(--ok-f); color: var(--ok-t); }
+.estado--Pendiente { background: var(--pen-f); color: var(--pen-t); }
+.estado--Rechazada, .estado--RechazadoBanco, .estado--RechazadoSso { background: var(--err-f); color: var(--err-t); }
+
+button { padding: .6rem 1.2rem; border: 0; border-radius: 10px; background: var(--verde); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+button:hover { background: #083a25; }
+.error { color: var(--err-t); }

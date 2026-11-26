@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <title>YoPago API · Datos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="datos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="cabecera__interior">
+      <div>
+        <h1>YoPago API</h1>
+        <p>Datos que hay en la base de datos · <strong>solo desarrollo</strong></p>
+      </div>
+      <nav aria-label="Enlaces de la API">
+        <ul class="enlaces">
+          <li><a href="/swagger">Swagger (probar la API)</a></li>
+          <li><a href="/api/datos-desarrollo">JSON de esta página</a></li>
+          <li><a href="/health">Estado</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenido">
+    <p id="estado" role="status">Cargando…</p>
+
+    <section id="usuario-prueba" class="prueba" aria-labelledby="t-prueba" hidden>
+      <h2 id="t-prueba">Usuario de prueba para el front</h2>
+      <dl>
+        <div><dt>Cédula</dt><dd id="prueba-cedula"></dd></div>
+        <div><dt>Contraseña</dt><dd id="prueba-clave"></dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="t-directorio">
+      <h2 id="t-directorio">Directorio activo <span class="cuenta" id="n-directorio"></span></h2>
+      <div class="tabla-contenedor"><table id="tabla-directorio"></table></div>
+    </section>
+
+    <section aria-labelledby="t-clientes">
+      <h2 id="t-clientes">Clientes <span class="cuenta" id="n-clientes"></span></h2>
+      <div class="tabla-contenedor"><table id="tabla-clientes"></table></div>
+    </section>
+
+    <section aria-labelledby="t-compras">
+      <h2 id="t-compras">Compras SSO <span class="cuenta" id="n-compras"></span></h2>
+      <div class="tabla-contenedor"><table id="tabla-compras"></table></div>
+    </section>
+
+    <section aria-labelledby="t-pagos">
+      <h2 id="t-pagos">Pagos <span class="cuenta" id="n-pagos"></span></h2>
+      <div class="tabla-contenedor"><table id="tabla-pagos"></table></div>
+    </section>
+
+    <section aria-labelledby="t-cola">
+      <h2 id="t-cola">Avisos de pago hacia SSO (webhook) <span class="cuenta" id="n-cola"></span></h2>
+      <div class="tabla-contenedor"><table id="tabla-cola"></table></div>
+    </section>
+
+    <p><button type="button" id="actualizar">Actualizar</button></p>
+  </main>
+
+  <script src="datos.js"></script>
+</body>
+</html>

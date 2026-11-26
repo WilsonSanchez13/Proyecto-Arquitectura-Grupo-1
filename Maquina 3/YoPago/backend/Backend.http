@@ -1,0 +1,94 @@
+@Backend_HostAddress = http://localhost:5056
+
+GET {{Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### Variables (VS Code REST Client / Rider / Visual Studio)
+@host = http://localhost:8000
+@token = PEGA_AQUI_EL_TOKEN_ACCESO
+@apiKeySso = clave-sso-hacia-yopago-dev
+
+##############################  CLIENTES (front)  ##############################
+
+### 1. Login (copia tokenAcceso en @token)
+POST {{host}}/api/autenticacion/login
+Content-Type: application/json
+
+{ "cedula": "1.032.456.789", "clave": "YoPago2026*" }
+
+### 2. Compras pendientes
+GET {{host}}/api/compras/pendientes
+Authorization: Bearer {{token}}
+
+### 3. Historial (filtros opcionales)
+GET {{host}}/api/compras/historial?estado=Pagada&meses=6&busqueda=SSO-2026
+Authorization: Bearer {{token}}
+
+### 4. Medios de pago, bancos y tipos de cuenta
+GET {{host}}/api/pagos/opciones
+Authorization: Bearer {{token}}
+
+### 5. Resumen de pago de una compra
+GET {{host}}/api/pagos/checkout/SSO-2026-08417
+Authorization: Bearer {{token}}
+
+### 6. Pagar
+POST {{host}}/api/pagos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "numeroCompra": "SSO-2026-08417",
+  "medioPago": "Pse",
+  "banco": "Bancolombia",
+  "tipoCuenta": "Ahorros",
+  "correoComprobante": "were06013@gmail.com",
+  "autorizaDebito": true
+}
+
+### 7. Comprobante (JSON)
+GET {{host}}/api/pagos/YP-87901145
+Authorization: Bearer {{token}}
+
+### 8. Comprobante PDF
+GET {{host}}/api/pagos/YP-87901145/comprobante.pdf
+Authorization: Bearer {{token}}
+
+### 9. Enviar comprobante por correo
+POST {{host}}/api/pagos/YP-87901145/comprobante/correo
+Authorization: Bearer {{token}}
+
+### 10. Recuperar acceso
+POST {{host}}/api/autenticacion/recuperacion/solicitar
+Content-Type: application/json
+
+{ "cedula": "1032456789" }
+
+##############################  SSO (X-Api-Key)  ##############################
+
+### 11. SSO → YoPago: registrar una compra (201 si es nueva, 200 si ya existía)
+POST {{host}}/api/sso/compras
+X-Api-Key: {{apiKeySso}}
+Content-Type: application/json
+
+{
+  "cedula": "1032456789",
+  "numeroCompra": "SSO-2026-09999",
+  "valor": 50000000,
+  "valorOferta": 47000000,
+  "impuestos": 3000000,
+  "comision": 0,
+  "descripcion": "Lote 30 — Motocicleta de prueba",
+  "codigoSubasta": "Subasta 041"
+}
+
+### 12. Polling: ¿ya pagó esta compra?
+GET {{host}}/api/sso/compras/SSO-2026-07988
+X-Api-Key: {{apiKeySso}}
+
+### 13. Polling por lotes: pagos confirmados desde una fecha
+GET {{host}}/api/sso/pagos?desde=2026-01-01T00:00:00-05:00
+X-Api-Key: {{apiKeySso}}
+
+### Estado de la API
+GET {{host}}/health
