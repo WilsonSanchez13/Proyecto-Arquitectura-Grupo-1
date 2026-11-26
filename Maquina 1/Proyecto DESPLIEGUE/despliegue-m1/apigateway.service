@@ -1,0 +1,14 @@
+[Unit]
+Description=ApiGateway SSO (M1)
+After=network.target nginx.service
+
+[Service]
+User=estudiante
+WorkingDirectory=/opt/apigateway
+Environment=GATEWAY_UPSTREAM=http://127.0.0.1:8090
+ExecStart=/usr/bin/java -jar /opt/apigateway/apigateway.jar
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=Active Directory simulado del SSO
+After=network.target
+
+[Service]
+User=__USUARIO__
+WorkingDirectory=/opt/activedirectory
+Environment=AD_PORT=8200
+Environment=AD_API_KEY=clave-ad-2026
+ExecStart=/usr/bin/java -jar /opt/activedirectory/activedirectory.jar
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
